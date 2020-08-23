@@ -2,15 +2,15 @@ const Employee = require("./Employee");
 
 class Manager extends Employee {
   constructor(name, id, email, officeNumber) {
-    super(name, id, email, officeNumber);
-    officeNumber = this.officeNumber;
+    super(name, id, email);
+    this.officeNumber = officeNumber;
   }
 
   getRole() {
     return "Manager";
   }
-  getGithub() {
-    return github;
+  getOfficeNumber() {
+    return this.officeNumber;
   }
 }
 

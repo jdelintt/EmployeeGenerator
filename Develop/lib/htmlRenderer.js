@@ -1,6 +1,6 @@
 const path = require("path");
 const fs = require("fs");
-const Employee = require("./Employee.js");
+const Employee = require("./Employee");
 
 const templatesDir = path.resolve(__dirname, "../templates");
 

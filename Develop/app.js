@@ -10,13 +10,15 @@ const outputPath = path.join(OUTPUT_DIR, "team.html");
 
 const render = require("./lib/htmlRenderer");
 
+var employeeArr = [];
+
 // Write code to use inquirer to gather information about the development team members,
 var employeeRole = [
   {
     type: "list",
     message: "What is the employee's role?",
     name: "role",
-    choices: ["Engineer", "Manager", "Intern"],
+    choices: ["Engineer", "Manager", "Intern", "Finished Adding"],
   },
 ];
 var engineerQuestions = [
@@ -32,8 +34,8 @@ var engineerQuestions = [
   },
   {
     type: "input",
-    message: "What is your name?",
-    name: "name",
+    message: "What is your email?",
+    name: "email",
   },
   {
     type: "input",
@@ -42,25 +44,63 @@ var engineerQuestions = [
   },
 ];
 
-inquirer
-  .prompt(employeeRole)
-  .then(function (result) {
-    console.log(result);
-    return result;
-  })
-  .then(function (result) {
-    if (result.role === "Engineer") {
-      inquirer.prompt(engineerQuestions).then((data) => {
-        var employeeArr = [];
-        employeeArr.push(data);
+promptForEmployeeInfo();
+
+function promptForEmployeeInfo() {
+  inquirer
+    .prompt(employeeRole)
+    .then(function (result) {
+      console.log(result);
+      return result;
+    })
+    .then(function (result) {
+      if (result.role === "Engineer") {
+        inquirer.prompt(engineerQuestions).then((data) => {
+          console.log(data);
+
+          var thisEngineer = new Engineer(
+            data.name,
+            data.id,
+            data.email,
+            data.github
+          );
+          employeeArr.push(thisEngineer);
+          promptForEmployeeInfo();
+        });
+      } else if (result.role === "Manager") {
+        inquirer.prompt(engineerQuestions).then((data) => {
+          console.log(data);
+
+          var thisEngineer = new Manager(
+            data.name,
+            data.id,
+            data.email,
+            data.github
+          );
+          employeeArr.push(thisEngineer);
+          promptForEmployeeInfo();
+        });
+      } else if (result.role === "Intern") {
+        inquirer.prompt(engineerQuestions).then((data) => {
+          console.log(data);
+
+          var thisEngineer = new Intern(
+            data.name,
+            data.id,
+            data.email,
+            data.school
+          );
+          employeeArr.push(thisEngineer);
+          promptForEmployeeInfo();
+        });
+      } else {
         var html = render(employeeArr);
-        console.log(html);
         fs.writeFile(outputPath, html, (error) => {
           if (error) throw error;
         });
-      });
-    }
-  });
+      }
+    });
+}
 
 // and to create objects for each team member (using the correct classes as blueprints!)
 

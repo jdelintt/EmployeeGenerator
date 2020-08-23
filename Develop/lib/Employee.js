@@ -1,16 +1,22 @@
+const render = require("./htmlRenderer");
+
 // TODO: Write code to define and export the Employee class
 class Employee {
   constructor(name, id, email) {
-    name = this.name;
-    id = this.id;
-    email = this.email;
+    this.name = name;
+    this.id = id;
+    this.email = email;
   }
 
-  getName() {}
-  getId() {}
-  getEmail() {}
-  getRole() {
-    return Employee;
+  getName() {
+    return this.name;
   }
+  getId() {
+    return this.id;
+  }
+  getEmail() {
+    return this.email;
+  }
+  getRole() {}
 }
 module.exports = Employee;
