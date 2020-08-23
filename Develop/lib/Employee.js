@@ -9,6 +9,8 @@ class Employee {
   getName() {}
   getId() {}
   getEmail() {}
-  getRole() {}
+  getRole() {
+    return Employee;
+  }
 }
 module.exports = Employee;
