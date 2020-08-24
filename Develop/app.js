@@ -44,6 +44,52 @@ var engineerQuestions = [
   },
 ];
 
+var managerQuestions = [
+  {
+    type: "input",
+    message: "What is your name?",
+    name: "name",
+  },
+  {
+    type: "input",
+    name: "id",
+    message: "What is your id?",
+  },
+  {
+    type: "input",
+    message: "What is your email?",
+    name: "email",
+  },
+  {
+    type: "input",
+    name: "officenumber",
+    message: "What is your office number?",
+  },
+];
+
+var internQuestions = [
+  {
+    type: "input",
+    message: "What is your name?",
+    name: "name",
+  },
+  {
+    type: "input",
+    name: "id",
+    message: "What is your id?",
+  },
+  {
+    type: "input",
+    message: "What is your email?",
+    name: "email",
+  },
+  {
+    type: "input",
+    name: "school",
+    message: "What school do you attend?",
+  },
+];
+
 promptForEmployeeInfo();
 
 function promptForEmployeeInfo() {
@@ -68,20 +114,20 @@ function promptForEmployeeInfo() {
           promptForEmployeeInfo();
         });
       } else if (result.role === "Manager") {
-        inquirer.prompt(engineerQuestions).then((data) => {
+        inquirer.prompt(managerQuestions).then((data) => {
           console.log(data);
 
           var thisEngineer = new Manager(
             data.name,
             data.id,
             data.email,
-            data.github
+            data.officenumber
           );
           employeeArr.push(thisEngineer);
           promptForEmployeeInfo();
         });
       } else if (result.role === "Intern") {
-        inquirer.prompt(engineerQuestions).then((data) => {
+        inquirer.prompt(internQuestions).then((data) => {
           console.log(data);
 
           var thisEngineer = new Intern(
